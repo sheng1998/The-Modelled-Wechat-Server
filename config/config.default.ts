@@ -3,26 +3,9 @@ import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
 
-  // override config from framework / plugin
-  // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1659108148590_7160';
+  config.keys = 'XVCJ9.eyJkYXRhIjpbeyJ0b29sdHQiOiJodHR0MywiZXhwIjoxNjYwNjY1NTk5LCJhdWQiOiIiLCJpc3MiOiIxMjI';
 
-  // add your egg config in here
-  config.middleware = [];
-
-  // add your special config in here
-  const bizConfig = {
-    sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
-  };
-
-  // 指定项目运行的端口号
-  config.cluster = {
-    listen: {
-      path: '',
-      port: 9999,
-      hostname: '127.0.0.1',
-    }
-  };
+  config.middleware = ['handleError'];
 
   // 连接mongodb
   config.mongoose = {
@@ -32,9 +15,22 @@ export default (appInfo: EggAppInfo) => {
     },
   };
 
-  // the return config will combines to EggAppConfig
+  console.log(typeof appInfo);
+
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+     // 跨域白名单
+    domainWhiteList: [],
+  };
+  // // 允许跨域的方法
+  // config.cors = {
+  //   origin: '*',
+  //   allowMethods: 'GET, PUT, POST, DELETE, PATCH'
+  // };
+
   return {
     ...config,
-    ...bizConfig,
   };
 };
