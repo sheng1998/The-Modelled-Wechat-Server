@@ -21,7 +21,7 @@ export default (appInfo: EggAppInfo) => {
     csrf: {
       enable: false,
     },
-     // 跨域白名单
+    // 跨域白名单
     domainWhiteList: [],
   };
   // // 允许跨域的方法
