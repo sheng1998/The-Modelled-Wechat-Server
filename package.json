@@ -8,8 +8,8 @@
     "declarations": true
   },
   "scripts": {
-    "lint": "eslint app config --ext .js,.ts",
-    "lint:fix": "eslint app config --fix --ext .js,.ts",
+    "lint": "eslint app config app.js --ext .js,.ts",
+    "lint:fix": "eslint app config app.js --fix --ext .js,.ts",
     "dev": "egg-bin dev --port 7002",
     "serve": "npm run dev"
   },

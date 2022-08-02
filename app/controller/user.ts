@@ -7,9 +7,8 @@ export default class UserController extends Controller {
     // 验证参数是否正确
     ctx.validate(
       {
-        username: { type: 'string' },
-        // TODO 自定义密码校验函数
-        password: { type: 'string' },
+        username: { type: 'username' },
+        password: { type: 'password' },
       },
       ctx.request.body,
     );
@@ -40,8 +39,8 @@ export default class UserController extends Controller {
     // 验证参数是否正确
     ctx.validate(
       {
-        username: { type: 'string' },
-        password: { type: 'string' },
+        username: { type: 'username' },
+        password: { type: 'password' },
       },
       ctx.request.body,
     );
