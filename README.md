@@ -1,33 +1,34 @@
-# hackernews-async-ts
+# 仿微信聊天室项目-后台
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+## 项目描述
 
-## QuickStart
+这是一个基于 `egg + ts + eslint` （node）的仿微信聊天室项目后台。
 
-### Development
+## 开发环境
 
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
+* node版本：16.14.2
+* vscode版本：1.66.2
+
+## 项目初始化和构建流程
+
+### 1、依赖包安装
+
+```shell
+npm install
 ```
 
-Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
+### 2、运行开发服
 
-### Deploy
-
-```bash
-$ npm run tsc
-$ npm start
+```shell
+# npm run serve
+npm run dev
 ```
 
-### Npm Scripts
+### 3、文件 eslint 检测并修复文件 eslint 报错
 
-- Use `npm run lint` to check code style
-- Use `npm test` to run unit test
-- se `npm run clean` to clean compiled js at development mode once
-
-### Requirement
-
-- Node.js 8.x
-- Typescript 2.8+
+```shell
+# 检测
+npm run lint
+# 修复
+npm run lint:fix
+```
