@@ -19,7 +19,14 @@ export default (appInfo: EggAppInfo) => {
 
   config.security = {
     csrf: {
-      enable: false,
+      enable: true,
+      // 通过 header 传递 CSRF token 的默认字段为 x-csrf-token
+      headerName: 'x-csrf-token',
+      // Cookie 中的字段名，默认为 csrfToken
+      cookieName: 'csrfToken',
+      // Session 中的字段名，默认为 csrfToken
+      sessionName: 'csrfToken',
+      ignore: ['/register', '/login'],
     },
     // 跨域白名单
     domainWhiteList: [],
