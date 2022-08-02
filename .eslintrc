@@ -1,6 +1,26 @@
 {
-  "extends": "eslint-config-egg/typescript",
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "import"
+  ],
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": 2020,
+    "sourceType": "moudle"
+  },
+  "rules": {
+    "import/extensions": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
+    "linebreak-style": "off",
+    "import/no-unresolved": "off"
   }
 }
