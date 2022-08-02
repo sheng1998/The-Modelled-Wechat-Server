@@ -36,18 +36,13 @@ export default class UserController extends Controller {
   // 用户登录
   public async login() {
     const { ctx } = this;
-    // 验证参数是否正确
-    ctx.validate(
-      {
-        username: { type: 'username' },
-        password: { type: 'password' },
-      },
-      ctx.request.body,
-    );
-    const user = await ctx.service.user.findByUsername(
-      ctx.request.body.username,
-      true,
-    );
+    const { username, password } = ctx.request.body;
+    if (!username) {
+      ctx.throw(422, '请输入用户名！');
+    } else if (!password) {
+      ctx.throw(422, '请正确输入密码！');
+    }
+    const user = await ctx.service.user.findByUsername(username, true);
 
     // 验证用户是否存在
     if (!user) {
@@ -55,7 +50,7 @@ export default class UserController extends Controller {
     }
 
     // 验证密码是否正确
-    if (ctx.helper.md5(ctx.request.body.password) !== user.password) {
+    if (ctx.helper.md5(password) !== user.password) {
       ctx.throw(422, '密码错误！');
     }
 
