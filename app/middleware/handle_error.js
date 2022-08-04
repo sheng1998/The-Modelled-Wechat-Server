@@ -1,7 +1,7 @@
 module.exports = () => async function handleError(ctx, next) {
   try {
     await next();
-  } catch (error: any) {
+  } catch (error) {
     // 记录错误日志
     ctx.app.emit('error', error, ctx);
 

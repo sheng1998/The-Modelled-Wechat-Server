@@ -1,16 +1,8 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "plugins": [
-    "prettier",
-    "import"
-  ],
+  "extends": ["airbnb"],
+  "plugins": ["prettier"],
   "parserOptions": {
-    "parser": "@typescript-eslint/parser",
-    "ecmaVersion": 2020,
-    "sourceType": "moudle"
+    "ecmaVersion": 2020
   },
   "rules": {
     "import/extensions": "off",

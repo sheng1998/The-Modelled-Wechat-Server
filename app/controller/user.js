@@ -1,8 +1,8 @@
-import { Controller } from 'egg';
+const { Controller } = require('egg');
 
-export default class UserController extends Controller {
+module.exports = class UserController extends Controller {
   // 用户注册
-  public async register() {
+  async register() {
     const { ctx } = this;
     // 验证参数是否正确
     ctx.validate(
@@ -34,7 +34,7 @@ export default class UserController extends Controller {
   }
 
   // 用户登录
-  public async login() {
+  async login() {
     const { ctx } = this;
     const { username, password } = ctx.request.body;
     if (!username) {
@@ -65,4 +65,4 @@ export default class UserController extends Controller {
       'update_time',
     ]);
   }
-}
+};

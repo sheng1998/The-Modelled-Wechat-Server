@@ -1,6 +1,4 @@
-import { EggPlugin } from 'egg';
-
-const plugin: EggPlugin = {
+module.exports = {
   // static: true,
   // nunjucks: {
   //   enable: true,
@@ -20,7 +18,4 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-cors',
   },
-
 };
-
-export default plugin;

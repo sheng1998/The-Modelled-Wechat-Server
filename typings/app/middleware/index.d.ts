@@ -2,7 +2,7 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportHandleError from '../../../app/middleware/handle_error';
+import ExportHandleError = require('../../../app/middleware/handle_error');
 
 declare module 'egg' {
   interface IMiddleware {

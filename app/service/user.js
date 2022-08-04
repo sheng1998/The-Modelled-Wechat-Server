@@ -1,8 +1,7 @@
-import { Service } from 'egg';
-import { TUser } from '../../typings/user/index';
+const { Service } = require('egg');
 
-export default class UserService extends Service {
-  public async create(data: TUser) {
+module.exports = class UserService extends Service {
+  async create(data) {
     const user = new this.app.model.User({
       ...data,
       password: this.ctx.helper.md5(data.password),
@@ -13,14 +12,14 @@ export default class UserService extends Service {
     return user;
   }
 
-  public async findByUsername(username: string, password = false) {
+  async findByUsername(username, password = false) {
     if (password) {
       return this.app.model.User.findOne({ username }).select('+password');
     }
     return this.app.model.User.findOne({ username });
   }
 
-  // public async getUserInfo(data: TUser) {
+  // async getUserInfo(data) {
   //   return this.app.model.User.findOne({ data });
   // }
-}
+};
