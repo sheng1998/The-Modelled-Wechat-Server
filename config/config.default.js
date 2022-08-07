@@ -25,7 +25,7 @@ module.exports = (appInfo) => {
       // Session 中的字段名，默认为 csrfToken
       sessionName: 'csrfToken',
       // 忽略csrf校验的接口
-      ignore: ['/register', '/login'],
+      ignore: ['/api/v1/register', '/api/v1/login'],
     },
     // 跨域白名单
     domainWhiteList: [],

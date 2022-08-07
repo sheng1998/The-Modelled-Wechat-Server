@@ -1,5 +1,7 @@
 module.exports = (app) => {
   const { controller, router } = app;
+  // 配置路由前缀
+  router.prefix('/api/v1');
 
   router.get('/', controller.home.index);
   // 注册
