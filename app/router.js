@@ -5,7 +5,7 @@ module.exports = (app) => {
 
   router.get('/', controller.home.index);
   // 注册
-  router.post('/register', controller.user.register);
+  router.post('/register', controller.user.register.index);
   // 登录
-  router.post('/login', controller.user.login);
+  router.post('/login', controller.user.login.index);
 };

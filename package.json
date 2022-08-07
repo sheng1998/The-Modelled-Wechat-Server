@@ -40,8 +40,8 @@
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
-    "lint": "eslint app config app.js --ext .js,.ts",
-    "lint:fix": "eslint app config app.js --fix --ext .js,.ts",
+    "lint": "eslint app config app.js --ext .js",
+    "lint:fix": "eslint app config app.js --fix --ext .js",
     "ci": "npm run lint && npm run cov",
     "autod": "autod"
   },
