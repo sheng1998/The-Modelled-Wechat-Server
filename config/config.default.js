@@ -26,9 +26,24 @@ module.exports = (appInfo) => {
       sessionName: 'csrfToken',
       // 忽略csrf校验的接口
       ignore: ['/api/v1/register', '/api/v1/login'],
+      // 跨域白名单
+      // domainWhiteList: ['http://localhost:*'],
     },
-    // 跨域白名单
-    domainWhiteList: [],
+  };
+
+  config.cors = {
+    origin: (ctx) => {
+      const { origin } = ctx.request.header;
+      const whiteList = ['http://119.91.74.150', 'https://sheng1998.github.io/'];
+      for (let i = 0; i < whiteList.length; i += 1) {
+        if (origin.startsWith(whiteList[i])) {
+          return origin;
+        }
+      }
+    },
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    // cookie跨域配置
+    credentials: true,
   };
 
   return {
