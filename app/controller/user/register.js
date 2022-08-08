@@ -1,7 +1,7 @@
 const { Controller } = require('egg');
 
 // 用户注册
-class UserController extends Controller {
+class RegisterController extends Controller {
   async index() {
     const { ctx } = this;
     // 验证参数是否正确
@@ -32,17 +32,18 @@ class UserController extends Controller {
       });
     }
 
-    // 生成token
+    // 生成token并设置cookie
+    // eslint-disable-next-line no-underscore-dangle
+    const token = ctx.helper.createToken({ userId: user._id });
+    ctx.helper.setCookie('session_id', token);
 
     // 响应
     const body = await ctx.service.user.create(ctx.request.body);
     ctx.body = ctx.helper.handleResponseBody(body, '注册成功！', [
       'username',
       'avatar',
-      'create_time',
-      'update_time',
     ]);
   }
 }
 
-module.exports = UserController;
+module.exports = RegisterController;

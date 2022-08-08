@@ -1,7 +1,7 @@
 const { Controller } = require('egg');
 
 // 用户登录
-class UserController extends Controller {
+class LoginController extends Controller {
   async index() {
     const { ctx } = this;
     const { username, password } = ctx.request.body;
@@ -22,17 +22,17 @@ class UserController extends Controller {
       ctx.throw(422, { code: 2, message: '密码错误！' });
     }
 
-    // 生成token
+    // 生成token并设置cookie
+    // eslint-disable-next-line no-underscore-dangle
+    const token = ctx.helper.createToken({ userId: user._id });
+    ctx.helper.setCookie('session_id', token);
 
-    // 响应
-    const body = await ctx.service.user.create(ctx.request.body);
-    ctx.body = ctx.helper.handleResponseBody(body, '登陆成功！', [
+    // 响应数据
+    ctx.body = ctx.helper.handleResponseBody(user, '登陆成功！', [
       'username',
       'avatar',
-      'create_time',
-      'update_time',
     ]);
   }
 }
 
-module.exports = UserController;
+module.exports = LoginController;

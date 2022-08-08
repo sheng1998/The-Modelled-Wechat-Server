@@ -17,7 +17,8 @@ module.exports = (appInfo) => {
 
   config.security = {
     csrf: {
-      enable: true,
+      // 关闭csrf校验
+      enable: false,
       // 通过 header 传递 CSRF token 的默认字段为 x-csrf-token
       headerName: 'x-csrf-token',
       // Cookie 中的字段名，默认为 csrfToken
@@ -44,6 +45,11 @@ module.exports = (appInfo) => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
     // cookie跨域配置
     credentials: true,
+  };
+
+  config.jwt = {
+    secret: '6IkpXVCJ9.eyJkYXRhIjpbeyJ0b29sdHQiOiJodHRwczovL3Rvb2x0dC5jb20ifV0sImlhdCI6MTY1OTk2NTU0MCwiZX',
+    expiresIn: '2d',
   };
 
   return {
