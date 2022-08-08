@@ -33,6 +33,46 @@ class LoginController extends Controller {
       'avatar',
     ]);
   }
+
+  // 检查当前登录状态
+  async check() {
+    const { ctx } = this;
+    const sessionId = ctx.cookies.get('session_id', { signed: false });
+
+    // token不存在
+    if (!sessionId) {
+      ctx.throw(403, { code: 1, message: '请先登陆！' });
+    }
+
+    // 判断 token 是否有效
+    let userId = '';
+    try {
+      userId = ctx.helper.verifyToken(sessionId).userId;
+    } catch (error) {
+      ctx.throw(403, { code: 1, message: '请先登陆！' });
+    }
+
+    // token 解析失败
+    if (!userId) {
+      ctx.throw(403, { code: 1, message: '请先登陆！' });
+    }
+
+    // 校验用户是否存在
+    const user = await ctx.service.user.findById(userId);
+    if (!user) {
+      ctx.throw(403, { code: 1, message: '请先登陆！' });
+    }
+
+    // 已经登录重新生成token并设置cookie
+    // eslint-disable-next-line no-underscore-dangle
+    const token = ctx.helper.createToken({ userId: user._id });
+    ctx.helper.setCookie('session_id', token);
+
+    ctx.body = ctx.helper.handleResponseBody(user, '已登录！', [
+      'username',
+      'avatar',
+    ]);
+  }
 }
 
 module.exports = LoginController;
