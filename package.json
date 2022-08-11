@@ -15,7 +15,8 @@
     "egg-scripts": "^2.6.0",
     "egg-validate": "^2.0.2",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "nodejs-jsencrypt": "^3.0.0-rc.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",

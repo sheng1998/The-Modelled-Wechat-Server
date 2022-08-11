@@ -4,6 +4,18 @@ const { Controller } = require('egg');
 class RegisterController extends Controller {
   async index() {
     const { ctx } = this;
+    if (!ctx.request.body.password) {
+      ctx.throw(422, { code: 2, message: '请正确输入密码！' });
+    }
+    const password = ctx.helper.privDecrypt(ctx.request.body.password);
+    if (password) {
+      ctx.request.body.password = password;
+    }
+    // if (!password) {
+    //   ctx.throw(422, { code: 2, message: '密码请加密传输！' });
+    // } else {
+    //   ctx.request.body.password = password;
+    // }
     // 验证参数是否正确
     try {
       ctx.validate(
@@ -32,14 +44,14 @@ class RegisterController extends Controller {
       });
     }
 
+    const newUser = await ctx.service.user.create(ctx.request.body);
     // 生成token并设置cookie
     // eslint-disable-next-line no-underscore-dangle
-    const token = ctx.helper.createToken({ userId: user._id });
+    const token = ctx.helper.createToken({ userId: newUser._id });
     ctx.helper.setCookie('session_id', token);
 
     // 响应
-    const body = await ctx.service.user.create(ctx.request.body);
-    ctx.body = ctx.helper.handleResponseBody(body, '注册成功！', [
+    ctx.body = ctx.helper.handleResponseBody(newUser, '注册成功！', [
       'username',
       'avatar',
     ]);

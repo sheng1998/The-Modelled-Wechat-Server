@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const lodash = require('lodash');
 const jwt = require('jsonwebtoken');
+const { JSEncrypt } = require('nodejs-jsencrypt');
 
 module.exports = {
   lodash,
@@ -41,5 +42,19 @@ module.exports = {
       // 是否对cookie进行加密
       encrypt: false,
     });
+  },
+  // 使用公钥加密字符串
+  publicEncrypt(data) {
+    const { publicKey } = this.app.config.crypto;
+    const encrypt = new JSEncrypt();
+    encrypt.setPublicKey(publicKey);
+    return encrypt.encrypt(data);
+  },
+  // 使用私钥解密
+  privDecrypt(data) {
+    const { privateKey } = this.app.config.crypto;
+    const encrypt = new JSEncrypt();
+    encrypt.setPrivateKey(privateKey);
+    return encrypt.decrypt(data);
   },
 };

@@ -4,7 +4,8 @@ const { Controller } = require('egg');
 class LoginController extends Controller {
   async index() {
     const { ctx } = this;
-    const { username, password } = ctx.request.body;
+    // eslint-disable-next-line no-console, prefer-const
+    let { username, password } = ctx.request.body;
     if (!username) {
       ctx.throw(422, { code: 1, message: '请输入用户名！' });
     } else if (!password) {
@@ -17,7 +18,11 @@ class LoginController extends Controller {
       ctx.throw(422, { code: 1, message: '用户不存在！' });
     }
 
-    // 验证密码是否正确
+    // 验证密码是否正确(先解密密码)
+    const decryptPassword = ctx.helper.privDecrypt(password);
+    if (decryptPassword) {
+      password = decryptPassword;
+    }
     if (ctx.helper.md5(password) !== user.password) {
       ctx.throw(422, { code: 2, message: '密码错误！' });
     }
