@@ -8,6 +8,7 @@ class RegisterController extends Controller {
       ctx.throw(422, { code: 2, message: '请正确输入密码！' });
     }
     const password = ctx.helper.privDecrypt(ctx.request.body.password);
+    // 如果有password证明请求体的密码经过公钥加密，password为解密后的数据
     if (password) {
       ctx.request.body.password = password;
     }
