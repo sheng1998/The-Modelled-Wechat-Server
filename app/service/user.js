@@ -9,7 +9,7 @@ module.exports = class UserService extends Service {
     });
     // 保存到数据库
     await user.save();
-    return this.handleUserInfo(user);
+    return UserService.handleUserInfo(user);
   }
 
   async findById(id, password = false) {
@@ -19,7 +19,7 @@ module.exports = class UserService extends Service {
     } else {
       user = await this.app.model.User.findById(id);
     }
-    return this.handleUserInfo(user);
+    return UserService.handleUserInfo(user);
   }
 
   async findByUsername(username, password = false) {
@@ -29,7 +29,7 @@ module.exports = class UserService extends Service {
     } else {
       user = await this.app.model.User.findOne({ username });
     }
-    return this.handleUserInfo(user);
+    return UserService.handleUserInfo(user);
   }
 
   // 由于读取到的user不是普通的对象，需要对默认值进行处理
